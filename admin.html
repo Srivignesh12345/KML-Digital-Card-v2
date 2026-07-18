@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Kalpana Microbiology Lab</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <img src="templates/download.jpg" alt="Kalpana Microbiology Lab Logo" class="login-logo">
+      <h2>Admin Panel</h2>
+      <p>Kalpana Microbiology Lab Analytics</p>
+    </div>
+    
+    <form id="loginForm" class="login-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required placeholder="admin@kalpanalab.com">
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required placeholder="••••••••">
+      </div>
+      
+      <button type="submit" class="btn btn-green login-btn">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+      
+      <p id="loginError" class="error-message"></p>
+    </form>
+  </div>
+</div>
+
+<!-- DASHBOARD PAGE -->
+<div id="dashboardPage" class="dashboard-container" style="display: none;">
+  
+  <!-- HEADER -->
+  <header class="admin-header">
+    <div class="admin-logo">
+      <img src="templates/download.jpg" alt="Kalpana Microbiology Lab Logo">
+      <div class="admin-title">
+        <h3>Admin Panel</h3>
+        <span class="admin-subtitle">Analytics Dashboard</span>
+      </div>
+    </div>
+    
+    <div class="admin-nav">
+      <button id="logoutBtn" class="btn btn-outline">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-main">
+    
+    <!-- STATS CARDS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-eye"></i>
+        </div>
+        <div class="stat-info">
+          <h4>Total Page Views</h4>
+          <p id="totalPageViews">0</p>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-mouse-pointer"></i>
+        </div>
+        <div class="stat-info">
+          <h4>Service Enquiries</h4>
+          <p id="totalServiceClicks">0</p>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="stat-info">
+          <h4>Contact Submissions</h4>
+          <p id="totalContactSubmissions">0</p>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+          <h4>Unique Visitors</h4>
+          <p id="uniqueVisitors">0</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHARTS SECTION -->
+    <div class="charts-section">
+      
+      <!-- MONTHLY ANALYTICS PIE CHART -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>Monthly Analytics Overview</h3>
+          <select id="monthSelector" class="month-selector">
+            <option value="current">Current Month</option>
+            <option value="last">Last Month</option>
+            <option value="3months">Last 3 Months</option>
+            <option value="6months">Last 6 Months</option>
+          </select>
+        </div>
+        <div class="chart-body">
+          <canvas id="monthlyPieChart"></canvas>
+        </div>
+      </div>
+
+      <!-- SERVICE POPULARITY CHART -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>Service Popularity</h3>
+        </div>
+        <div class="chart-body">
+          <canvas id="servicePopularityChart"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DETAILED ANALYTICS TABLE -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>Recent Activity</h3>
+        <button id="refreshBtn" class="btn btn-outline">
+          <i class="fas fa-sync-alt"></i> Refresh
+        </button>
+      </div>
+      <div class="table-body">
+        <table class="analytics-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Page/Service</th>
+              <th>User Agent</th>
+            </tr>
+          </thead>
+          <tbody id="analyticsTableBody">
+            <!-- Data will be populated here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<!-- Firebase Config -->
+<script src="firebase-config.js"></script>
+
+<!-- Admin Panel Script -->
+<script src="js/admin.js"></script>
+
+</body>
+</html>

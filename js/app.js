@@ -78,3 +78,61 @@ function closeLightbox() {
   const lightbox = document.getElementById("lightbox");
   if (lightbox) lightbox.style.display = "none";
 }
+
+/* ===============================
+   SERVICE MODAL
+================================ */
+function openServiceModal(serviceName, imagePath) {
+  const modal = document.getElementById("serviceModal");
+  const title = document.getElementById("serviceModalTitle");
+  const image = document.getElementById("serviceModalImage");
+
+  if (modal && title && image) {
+    title.textContent = serviceName;
+    image.src = imagePath;
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden"; // Prevent background scrolling
+  }
+}
+
+function closeServiceModal() {
+  const modal = document.getElementById("serviceModal");
+  if (modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = ""; // Restore scrolling
+  }
+}
+
+// Add click handlers to service items
+document.addEventListener("DOMContentLoaded", () => {
+  const serviceItems = document.querySelectorAll(".service-item");
+
+  serviceItems.forEach(item => {
+    item.addEventListener("click", () => {
+      const serviceName = item.getAttribute("data-service");
+      const imagePath = item.getAttribute("data-image");
+
+      if (imagePath && imagePath !== "") {
+        openServiceModal(serviceName, imagePath);
+      }
+    });
+  });
+
+  // Close modal when clicking outside content
+  const modal = document.getElementById("serviceModal");
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeServiceModal();
+      }
+    });
+  }
+
+  // Close modal on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeServiceModal();
+      closeLightbox();
+    }
+  });
+});

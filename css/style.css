@@ -630,6 +630,21 @@ html {
   font-size: 18px;
 }
 
+.google-review-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: center;
+}
+
+.google-review-btn i {
+  font-size: 18px;
+}
+
+.google-review-btn .fa-star {
+  color: #FFD700;
+}
+
 .footer-link {
   font-size: 13px;
   color: #777;
@@ -923,5 +938,190 @@ html, body {
   .lab-name {
     font-size: 30px;
     text-indent: 0.5em;  /* 🔥 slightly stronger for mobile */
+  }
+}
+
+/* =========================
+   PREMIUM SERVICE MODAL
+   ========================= */
+
+/* MODAL OVERLAY */
+.service-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* MODAL CONTENT - PREMIUM GLASS CARD */
+.service-modal-content {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  
+  /* Premium embossed shadow effect */
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.25),
+    0 10px 20px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* CLOSE BUTTON */
+.service-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), #1a6b1a);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(34, 140, 34, 0.4);
+  z-index: 10;
+}
+
+.service-modal-close:hover {
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 6px 20px rgba(34, 140, 34, 0.5);
+}
+
+/* MODAL HEADER */
+.service-modal-header {
+  background: linear-gradient(135deg, rgba(34, 140, 34, 0.08), rgba(34, 140, 34, 0.03));
+  padding: 25px 30px;
+  border-bottom: 2px solid rgba(34, 140, 34, 0.15);
+  border-radius: 24px 24px 0 0;
+}
+
+.service-modal-header h3 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--dark-green);
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* MODAL BODY */
+.service-modal-body {
+  padding: 30px;
+}
+
+/* IMAGE WRAPPER - PREMIUM FRAME */
+.service-image-wrapper {
+  background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.06),
+    0 8px 25px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* SERVICE ITEM CURSOR INDICATOR */
+.service-item {
+  cursor: pointer;
+  position: relative;
+}
+
+.service-item::after {
+  content: '\f06e';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 14px;
+  color: var(--green);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.service-item:hover::after {
+  opacity: 1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .service-modal-content {
+    max-width: 95%;
+    border-radius: 20px;
+  }
+  
+  .service-modal-header {
+    padding: 20px;
+  }
+  
+  .service-modal-header h3 {
+    font-size: 22px;
+  }
+  
+  .service-modal-body {
+    padding: 20px;
+  }
+  
+  .service-modal-close {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    top: 15px;
+    right: 15px;
   }
 }

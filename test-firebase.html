@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Firebase Test</title>
+</head>
+<body>
+    <h1>Firebase Connection Test</h1>
+    <div id="status">Testing Firebase connection...</div>
+    <div id="error"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    
+    <script>
+        const statusDiv = document.getElementById('status');
+        const errorDiv = document.getElementById('error');
+        
+        try {
+            // Test Firebase initialization
+            statusDiv.innerHTML = '✓ Firebase initialized<br>';
+            
+            // Test Firestore
+            db.collection('test').add({
+                test: 'connection',
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                statusDiv.innerHTML += '✓ Firestore write successful<br>';
+                return db.collection('test').limit(1).get();
+            }).then((snapshot) => {
+                statusDiv.innerHTML += '✓ Firestore read successful<br>';
+                statusDiv.innerHTML += '<strong>✓ All Firebase services working!</strong>';
+            }).catch((error) => {
+                errorDiv.innerHTML = '❌ Firestore Error: ' + error.message;
+            });
+            
+        } catch (error) {
+            errorDiv.innerHTML = '❌ Firebase Error: ' + error.message;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analytics Tracking Test</title>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+</head>
+<body>
+    <h1>Analytics Tracking Test</h1>
+    <button onclick="testPageView()">Test Page View</button>
+    <button onclick="testServiceClick()">Test Service Click</button>
+    <button onclick="checkData()">Check Firebase Data</button>
+    
+    <div id="status"></div>
+    <div id="error"></div>
+    
+    <script>
+        // Use db from firebase-config.js
+        const statusDiv = document.getElementById('status');
+        const errorDiv = document.getElementById('error');
+        
+        async function testPageView() {
+            try {
+                statusDiv.innerHTML = 'Testing page view tracking...<br>';
+                await db.collection('analytics').add({
+                    type: 'Page Views',
+                    page: 'Test Page',
+                    visitorId: 'test_visitor',
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    userAgent: navigator.userAgent
+                });
+                statusDiv.innerHTML += '✓ Page view tracked successfully<br>';
+            } catch (error) {
+                errorDiv.innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+        
+        async function testServiceClick() {
+            try {
+                statusDiv.innerHTML = 'Testing service click tracking...<br>';
+                await db.collection('serviceClicks').add({
+                    serviceName: 'Test Service',
+                    visitorId: 'test_visitor',
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                statusDiv.innerHTML += '✓ Service click tracked successfully<br>';
+            } catch (error) {
+                errorDiv.innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+        
+        async function checkData() {
+            try {
+                statusDiv.innerHTML = 'Checking Firebase data...<br>';
+                
+                const analyticsSnapshot = await db.collection('analytics').get();
+                statusDiv.innerHTML += `Analytics records: ${analyticsSnapshot.size}<br>`;
+                
+                const pageViewsSnapshot = await db.collection('pageViews').get();
+                statusDiv.innerHTML += `Page view records: ${pageViewsSnapshot.size}<br>`;
+                
+                const serviceClicksSnapshot = await db.collection('serviceClicks').get();
+                statusDiv.innerHTML += `Service click records: ${serviceClicksSnapshot.size}<br>`;
+                
+                if (analyticsSnapshot.size > 0) {
+                    statusDiv.innerHTML += '<br>Sample analytics data:<br>';
+                    analyticsSnapshot.docs.forEach(doc => {
+                        const data = doc.data();
+                        statusDiv.innerHTML += `- ${data.type}: ${data.page || data.serviceName || 'N/A'}<br>`;
+                    });
+                }
+                
+            } catch (error) {
+                errorDiv.innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
