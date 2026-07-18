@@ -1098,6 +1098,37 @@ html, body {
   opacity: 1;
 }
 
+/* SERVICES GRID WRAPPER */
+.services-grid-wrapper {
+  position: relative;
+}
+
+/* SERVICES HOVER POPUP */
+.services-hover-popup {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--dark-green);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.services-grid-wrapper:hover .services-hover-popup {
+  opacity: 1;
+  visibility: visible;
+  top: -50px;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .service-modal-content {
