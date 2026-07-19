@@ -46,7 +46,7 @@ body {
   font-weight: 600;
 
   margin: 0;           /* 🔑 VERY IMPORTANT */
-  padding-left: 32px;  /* aligns under 'a' of Kalpana */
+  padding-left: 40px;  /* aligns with lab-name margin-left */
 
   letter-spacing: 0.4px;
   color: var(--green);
