@@ -21,8 +21,6 @@ body {
   font-size: 48px;
   font-weight: 800;
   line-height: 1.05;
-  margin-left: 40px;   /* 🔑 aligns with first letter */
-
   margin: 0;           /* 🔑 remove default spacing */
 
   color: #ff00ff;
@@ -46,7 +44,7 @@ body {
   font-weight: 600;
 
   margin: 0;           /* 🔑 VERY IMPORTANT */
-  padding-left: 40px;  /* aligns with lab-name margin-left */
+  padding-left: 0;     /* removed alignment spacing */
 
   letter-spacing: 0.4px;
   color: var(--green);
