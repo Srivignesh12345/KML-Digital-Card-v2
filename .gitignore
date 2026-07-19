@@ -1,0 +1,50 @@
+# Images
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.svg
+*.ico
+*.webp
+*.tiff
+*.heic
+*.heif
+
+# Contact files
+*.vcf
+*.vcard
+
+# Sensitive configuration files
+firebase-config.js
+.env
+.env.local
+.env.*.local
+config.js
+secrets.json
+credentials.json
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS files
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node modules
+node_modules/
+
+# Build files
+dist/
+build/
