@@ -82,14 +82,27 @@ function closeLightbox() {
 /* ===============================
    SERVICE MODAL
 ================================ */
-function openServiceModal(serviceName, imagePath) {
+function openServiceModal(serviceName, imagePath, imagePath2 = null) {
   const modal = document.getElementById("serviceModal");
   const title = document.getElementById("serviceModalTitle");
   const image = document.getElementById("serviceModalImage");
+  const image2 = document.getElementById("serviceModalImage2");
+  const imageWrapper = document.querySelector(".service-image-wrapper");
 
   if (modal && title && image) {
     title.textContent = serviceName;
     image.src = imagePath;
+
+    // Handle second image
+    if (imagePath2 && image2) {
+      image2.src = imagePath2;
+      image2.style.display = "block";
+      imageWrapper.classList.add("two-images");
+    } else if (image2) {
+      image2.style.display = "none";
+      imageWrapper.classList.remove("two-images");
+    }
+
     modal.style.display = "flex";
     document.body.style.overflow = "hidden"; // Prevent background scrolling
   }
@@ -111,9 +124,10 @@ document.addEventListener("DOMContentLoaded", () => {
     item.addEventListener("click", () => {
       const serviceName = item.getAttribute("data-service");
       const imagePath = item.getAttribute("data-image");
+      const imagePath2 = item.getAttribute("data-image2");
 
       if (imagePath && imagePath !== "") {
-        openServiceModal(serviceName, imagePath);
+        openServiceModal(serviceName, imagePath, imagePath2);
       }
     });
   });

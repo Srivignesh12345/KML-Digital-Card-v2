@@ -1166,6 +1166,27 @@ html, body {
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
+/* TWO IMAGES LAYOUT - SIDE BY SIDE ON DESKTOP */
+.service-image-wrapper.two-images {
+  display: flex;
+  gap: 12px;
+}
+
+.service-image-wrapper.two-images img {
+  width: 50%;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .service-image-wrapper.two-images {
+    flex-direction: column;
+  }
+
+  .service-image-wrapper.two-images img {
+    width: 100%;
+  }
+}
+
 /* SERVICE ITEM CURSOR INDICATOR */
 .service-item {
   cursor: pointer;
