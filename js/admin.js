@@ -35,10 +35,18 @@ loginForm.addEventListener('submit', async (e) => {
   const password = document.getElementById('password').value;
   const errorElement = document.getElementById('loginError');
   
+  console.log('Login attempt with email:', email);
+  console.log('Password length:', password.length);
+  
   try {
-    await auth.signInWithEmailAndPassword(email, password);
+    console.log('Attempting Firebase sign in...');
+    const userCredential = await auth.signInWithEmailAndPassword(email, password);
+    console.log('Login successful:', userCredential.user.email);
     errorElement.textContent = '';
   } catch (error) {
+    console.error('Login error:', error);
+    console.error('Error code:', error.code);
+    console.error('Error message:', error.message);
     errorElement.textContent = 'Login failed: ' + error.message;
   }
 });
